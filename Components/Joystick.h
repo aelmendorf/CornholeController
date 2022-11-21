@@ -6,7 +6,9 @@ using namespace std;
 
 class Joystick: public Component{
 public:
-    Joystick(PinNumber ypin,PinNumber xPin):Component()
+    Joystick(PinNumber ypin,PinNumber xPin):Component(){
+        
+    }
 
 private:
     AnalogInput YInput;
