@@ -1,28 +1,39 @@
 #pragma once
+#include <ArduinoComponents.h>
 
-enum class State {
+using namespace components;
+using namespace std;
+
+enum SystemState {
 	Running,
 	Idle,
 	Paused,
 	Warmup,
 };
 
-enum class Position{
+enum Position{
     Load,
-    Released,
+    Release,
+};
+
+enum Mode{
+    Auto,
+    Manual,
+    Debug  
+};
+
+class ControllerState{
+public:
+    Mode mode;
+    SystemState state;
+private:
     
 };
 
-class SystemState{
-
-};
-
-
-
-
 class CornholeController{
 public:
-
+    void Init();
+    void HandleSerial();
 private:
 
 

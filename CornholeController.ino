@@ -1,13 +1,21 @@
 #include <ArduinoComponents.h>
 #include <ArduinoComponents/IO/AnalogInput.h>
 #include <ArduinoSTL.h>
+#include "CornholeController.h"
+#include <SR04.h>
+
+CornholeController controller;
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(38400);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
+
+}
+
+void serialEvent(){
 
 }

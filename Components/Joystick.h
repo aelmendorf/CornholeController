@@ -6,12 +6,12 @@ using namespace std;
 
 class Joystick: public Component{
 public:
-    Joystick(PinNumber ypin,PinNumber xPin):Component(){
-        
+    Joystick(PinNumber yPin,PinNumber xPin):Component(),yInput(yPin),xInput(xPin){
+
     }
 
 private:
-    AnalogInput YInput;
-    AnalogInput XInput;
+    AnalogInput yInput;
+    AnalogInput xInput;
 };
 
