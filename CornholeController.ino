@@ -2,6 +2,10 @@
 #include <ArduinoComponents/IO/AnalogInput.h>
 #include <ArduinoSTL.h>
 #include "CornholeController.h"
+#include <Servo.h>
+#include <Stepper.h>
+#include "./Components/LatchServo.h"
+#include "./Components/Util.h"
 #include <SR04.h>
 
 CornholeController controller;
