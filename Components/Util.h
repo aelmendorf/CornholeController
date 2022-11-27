@@ -55,7 +55,21 @@ enum Color{
 };
 
 //Ultrasonic
-#define TRIG_PIN 12
-#define ECHO_PIN 11 
+#define TRIG_PIN    12
+#define ECHO_PIN    11 
+#define STARTB      0
+#define STOPB       13
+#define RESETB      2
+#define SERVO       10
+
+#define STEP1       6
+#define STEP2       7
+#define STEP3       8
+#define STEP4       9
+
+#define GPIN        3
+#define BPIN        4
+#define RPIN        5
+
 
 //

@@ -16,8 +16,11 @@ class LatchServo:public Component {
 public:
 	LatchServo(int pin,int open,int mid,int close):Component(),
 	openAngle(open),closeAngle(close),centerAngle(mid){	
-		this->servo.attach(pin);
-		this->servo.write(mid);
+	}
+
+	void Init(){
+		this->servo.attach(SERVO);
+		this->servo.write(90);
 	}
 
 	void Open(){

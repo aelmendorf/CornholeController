@@ -12,11 +12,15 @@ CornholeController controller;
 
 void setup() {
   Serial.begin(38400);
-
+  while(!Serial){
+    ;
+  }
+  Serial.println("Initializing");
+  controller.Init();
 }
 
 void loop() {
-
+  controller.loop();
 
 }
 

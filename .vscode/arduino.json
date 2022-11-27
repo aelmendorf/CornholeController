@@ -1,4 +1,6 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "CornholeController.ino"
+    "sketch": "CornholeController.ino",
+    "port": "COM8",
+    "output": "C:\\Users\\aelmendo\\Documents\\Arduino\\build2"
 }

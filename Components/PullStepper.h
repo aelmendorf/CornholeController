@@ -14,6 +14,12 @@ public:
 		stepper(step,pin1,pin2,pin3,pin4),speed(speed),stepSize(step){
 			this->stepper.setSpeed(speed);
 			this->running=false;
+			this->stepTimer.onInterval([&](){
+				if(this->running){
+					this->Step();
+				}
+			},100);
+			RegisterChild(stepTimer);
 	}
 	void Start(){
 		this->running=true;
@@ -28,7 +34,7 @@ public:
 	}
 
 	void Step(){
-		this->stepper.step(this->stepSize);
+		this->stepper.step(this->stepSize/100);
 	}
 
 private:
@@ -36,10 +42,9 @@ private:
 	int speed;
 	int stepSize;
 	bool running;
+	Timer stepTimer;
 
 	void privateLoop(){
-		if(this->running){
-			this->Step();
-		}
+
 	}
 };
