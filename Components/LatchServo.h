@@ -9,7 +9,8 @@ using namespace std;
 
 enum LatchState{
 	OPEN,
-	CLOSE
+	CLOSE,
+	UNKNOWN
 };
 
 class LatchServo:public Component {
@@ -20,7 +21,6 @@ public:
 
 	void Init(){
 		this->servo.attach(SERVO);
-		this->servo.write(90);
 	}
 
 	void Open(){
@@ -33,14 +33,43 @@ public:
 		this->state=LatchState::CLOSE;
 	}
 
-	LatchState Toggle(){
-		if(this->state==LatchState::OPEN){
-			this->Close();
-			return this->state;
-		}else{
-			this->Open();
-			return this->state;
+	LatchState GetState(){
+		int angle=this->servo.read();
+		switch (angle){
+			case LATCH_ANGLE:{
+				this->state=LatchState::CLOSE;
+				break;
+			}
+			case OPEN_ANGLE:{
+				this->state=LatchState::OPEN;
+				break;
+			}
+			default:{
+				this->state=LatchState::UNKNOWN;
+				break;
+			} 
 		}
+		return this->state;
+	}
+
+	LatchState Toggle(){
+		switch(this->state){
+			case LatchState::OPEN:{
+				this->state=LatchState::CLOSE;
+				this->Close();
+				break;
+			}
+			case LatchState::CLOSE:{
+				this->state=LatchState::OPEN;
+				this->Open();
+				break;
+			}
+			case LatchState::UNKNOWN:{
+				Serial.println("Unknown state,manually open or close");
+				break;
+			}
+		}
+		return this->state;
 	}
 
 private:

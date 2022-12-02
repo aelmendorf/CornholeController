@@ -21,22 +21,19 @@ template <class T> int EEPROM_read(int addr, T& value) {
     return newAddr;
 }//End read any value/type
 
-
-struct SystemSettings{
-    long BeanBagPresent;
-    int ReloadDelay;
-    int StepperSpeed;
-    int OpenAngle;
-    int CloseAngle;
-    int MidAngle;
-    int StepSize;
+enum SystemState {
+    READY, //Latched and ready to fire
+    LOADING,  //Motor running, looking for object
+    LAUNCHING, // launching then short delay
+    INITIALIZING,
 };
 
-enum SystemState {
-	Running,
-	Idle,
-	Paused,
-	Warmup,
+enum Action{
+    Start,
+    FIRE,
+    RESET,
+    LOAD,
+    STOP
 };
 
 enum Position{
@@ -46,8 +43,7 @@ enum Position{
 
 enum Mode{
     Auto,
-    Manual,
-    Debug  
+    Manual  
 };
 
 enum Color{
@@ -67,9 +63,22 @@ enum Color{
 #define STEP3       8
 #define STEP4       9
 
-#define GPIN        3
-#define BPIN        4
-#define RPIN        5
+#define GPIN        4
+#define BPIN        5
+#define RPIN        3
 
 
-//
+//Parameters
+#define STEPS           200
+#define RPM             17
+#define DISTANCE        10 //cm
+#define RELOAD_DELAY    5000
+#define LATCH_ANGLE     120
+#define OPEN_ANGLE      90
+#define CENTER_ANGLE    60
+#define MODE            Mode::Auto
+#define MEASURE_N       25.0f
+#define FOUND_PERCENT   0.95f
+#define INIT_t          5000
+
+
