@@ -17,16 +17,21 @@ void CornholeController::InitAuto(){
     RegisterChild(stop);
     RegisterChild(reset);
     RegisterChild(printTimer);
+
     this->latchServo.Init();
+
+//May remove
     if(this->latchServo.GetState()==LatchState::UNKNOWN){
         this->latchServo.Close();   
     }   
+
     this->printTimer.onInterval([&](){
         Serial.print("Distance: ");
         this->rangeFinder.Measure();
         Serial.print(this->rangeFinder.GetDistance());
         Serial.println();
     },1000);
+
     this->start.onPress([&](){
         if(!this->systemStarted){
             this->systemStarted=true;
@@ -46,6 +51,7 @@ void CornholeController::InitAuto(){
 }
 
 void CornholeController::InitManual(){
+
     Serial.println("Starting Init, Setup timer");
     this->latchServo.Init();
     this->printTimer.onInterval([&](){
@@ -83,6 +89,35 @@ void CornholeController::InitManual(){
     RegisterChild(reset);
     this->indicator.TurnOn(Color::GREEN);
     Serial.println("Init Completed");
+}
+
+
+void CornholeController::ProcessButton(Action action){
+    switch(action){
+        case Action::Start:{
+            this->Start();
+            break;
+        }
+        case Action::FIRE:{
+            if(this->state==SystemState::READY){
+                this->Fire();
+            }
+            break;
+        }
+        case Action::LOAD:{
+            if(this->state!=SystemState::READY 
+            && this->state!=SystemState::LOADING){
+                this->Load();
+            }
+        }
+        case Action::RESET:{
+            this->Reset();
+            break;
+        }
+        case Action::STOP:{
+            this->Stop();
+        }
+    }
 }
 
 void CornholeController::Reset(){
@@ -143,34 +178,6 @@ bool CornholeController::ObjectFound(){
         return ret;
     }else{
         return false;
-    }
-}
-
-void CornholeController::ProcessButton(Action action){
-    switch(action){
-        case Action::Start:{
-            this->Start();
-            break;
-        }
-        case Action::FIRE:{
-            if(this->state==SystemState::READY){
-                this->Fire();
-            }
-            break;
-        }
-        case Action::LOAD:{
-            if(this->state!=SystemState::READY 
-            && this->state!=SystemState::LOADING){
-                this->Load();
-            }
-        }
-        case Action::RESET:{
-            this->Reset();
-            break;
-        }
-        case Action::STOP:{
-            this->Stop();
-        }
     }
 }
 

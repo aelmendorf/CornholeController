@@ -1,6 +1,6 @@
 #include <ArduinoComponents.h>
 #include <ArduinoComponents/IO/AnalogInput.h>
-#include <ArduinoSTL.h>
+// #include <ArduinoSTL.h>
 #include "CornholeController.h"
 #include <Servo.h>
 #include <Stepper.h>

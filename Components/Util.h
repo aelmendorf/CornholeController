@@ -1,25 +1,7 @@
 #pragma once
 #include <Arduino.h>
-#include <ArduinoSTL.h>
 #include <avr/pgmspace.h>
 #include <EEPROM.h>
-
-template <class T> int EEPROM_write(int addr, const T& value) {
-    const byte* p = (const byte*)(const void*)&value;
-    int newAddr;
-    for (newAddr = 0; newAddr < sizeof(value); newAddr++) {
-        EEPROM.write(addr++, *p++);
-    }
-    return newAddr;
-}//End write any value/type
-
-template <class T> int EEPROM_read(int addr, T& value) {
-    byte* p = (byte*)(void*)&value;
-    int newAddr;
-    for (newAddr = 0; newAddr < sizeof(value); newAddr++)
-        *p++ = EEPROM.read(addr++);
-    return newAddr;
-}//End read any value/type
 
 enum SystemState {
     READY, //Latched and ready to fire
@@ -53,16 +35,18 @@ enum Color{
 //Ultrasonic
 #define TRIG_PIN    12
 #define ECHO_PIN    11 
+//Buttons
 #define STARTB      0
 #define STOPB       13
 #define RESETB      2
+//Servo
 #define SERVO       10
-
+//Stepper
 #define STEP1       6
 #define STEP2       7
 #define STEP3       8
 #define STEP4       9
-
+//RGB
 #define GPIN        4
 #define BPIN        5
 #define RPIN        3
