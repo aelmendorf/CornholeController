@@ -2,6 +2,12 @@
 #include <Arduino.h>
 #include <avr/pgmspace.h>
 #include <EEPROM.h>
+/**
+ * @author Andrew Elmendorf
+ * Class: ELET 3190
+ * Team: 2B || !2B
+ * Description: Cornhole project controller software
+ */
 
 enum SystemState {
     READY, //Latched and ready to fire

@@ -3,6 +3,12 @@
 #include <ArduinoComponents.h>
 #include <Servo.h>
 #include "Util.h"
+/**
+ * @author Andrew Elmendorf
+ * Class: ELET 3190
+ * Team: 2B || !2B
+ * Description: Cornhole project controller software
+ */
 
 using namespace components;
 using namespace std;

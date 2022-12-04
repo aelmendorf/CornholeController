@@ -1,4 +1,10 @@
 #include "CornholeController.h"
+/**
+ * @author Andrew Elmendorf
+ * Class: ELET 3190
+ * Team: 2B || !2B
+ * Description: Cornhole project controller software
+ */
 
 void CornholeController::Init(){
     this->systemStarted=false;
