@@ -6,6 +6,7 @@
 #include "./Components/PullStepper.h"
 #include "./Components/RangeFinder.h"
 #include "./Components/RGB.h"
+#include "./Components/Buzzer.h"
 /**
  * @author Andrew Elmendorf
  * Class: ELET 3190
@@ -41,6 +42,7 @@ private:
     LatchServo latchServo;
     PullStepper pullStepper;
     RangeFinder rangeFinder;
+    Buzzer buzzer;
     RGB indicator;
     SystemState state;
     long tlaunch=0;

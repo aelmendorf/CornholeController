@@ -16,14 +16,14 @@ void CornholeController::Init(){
 }
 
 void CornholeController::InitAuto(){
-    RegisterChild(latchServo);
-    RegisterChild(pullStepper);
-    RegisterChild(rangeFinder); 
-    RegisterChild(start);
-    RegisterChild(stop);
-    RegisterChild(reset);
-    RegisterChild(printTimer);
-
+    RegisterChild(this->latchServo);
+    RegisterChild(this->pullStepper);
+    RegisterChild(this->rangeFinder); 
+    RegisterChild(this->start);
+    RegisterChild(this->stop);
+    RegisterChild(this->reset);
+    RegisterChild(this->printTimer);
+    RegisterChild(this->buzzer);
     this->latchServo.Init();
 
 //May remove
@@ -69,6 +69,7 @@ void CornholeController::InitManual(){
     Serial.println("Setup start");
     this->start.onPress([&](){
         this->indicator.TurnOn(Color::BLUE);
+        this->buzzer.StartSong();
         this->latchServo.Open();
         this->pullStepper.Start();
         Serial.println("Start Pressed: Latch Open, Servo Started");
@@ -168,6 +169,7 @@ void CornholeController::FindStartState(){
 
 void CornholeController::Start(){
     this->state=SystemState::INITIALIZING;
+    this->buzzer.StartSong();
     this->indicator.TurnOn(Color::BLUE);
     this->tinit=millis();
 }
