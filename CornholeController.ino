@@ -6,6 +6,7 @@
 #include "./Components/LatchServo.h"
 #include "./Components/Util.h"
 #include <SR04.h>
+#include <bi_polar_Stepper.h>
 
 /**
  * @author Andrew Elmendorf

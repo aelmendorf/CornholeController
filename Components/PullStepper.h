@@ -1,9 +1,8 @@
 #pragma once
 #include <Arduino.h>
-#include <ArduinoSTL.h>
 #include <ArduinoComponents.h>
 #include "Util.h"
-#include <Stepper.h>
+#include <bi_polar_Stepper.h>
 /**
  * @author Andrew Elmendorf
  * Class: ELET 3190
@@ -12,19 +11,20 @@
  */
 
 using namespace components;
-using namespace std;
 
 class PullStepper:public Component {
 public:
 	PullStepper(int speed,int step,int pin1,int pin2,int pin3,int pin4):Component(),
-		stepper(step,pin1,pin2,pin3,pin4),speed(speed),stepSize(step){
-			this->stepper.setSpeed(speed);
+		stepper(pin4,pin3,pin2,pin1),speed(speed),stepSize(step){
+			 this->stepper.set_step_per_rev(this->stepSize);
+			 this->stepper.set_RPM(this->speed);
 			this->running=false;
 			this->stepTimer.onInterval([&](){
 				if(this->running){
 					this->Step();
 				}
 			},100);
+
 			RegisterChild(stepTimer);
 	}
 	void Start(){
@@ -40,11 +40,11 @@ public:
 	}
 
 	void Step(){
-		this->stepper.step(this->stepSize/100);
+		this->stepper.rotate_CCW();
 	}
 
 private:
-	Stepper stepper;
+	bi_polar_Stepper stepper;
 	int speed;
 	int stepSize;
 	bool running;
